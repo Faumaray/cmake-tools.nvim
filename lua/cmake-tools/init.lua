@@ -136,7 +136,8 @@ function cmake.generate(opt, callback)
   -- be {env={}, args={}}, so it's okay.
   local kit_option = kits.build_env_and_args(
     config.kit,
-    const.cmake_always_use_terminal)
+    const.cmake_always_use_terminal,
+    const.cmake_kits_path)
 
   if const.cmake_build_directory ~= "" then
     config:update_build_dir(const.cmake_build_directory)
