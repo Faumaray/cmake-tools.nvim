@@ -118,6 +118,16 @@ function kits.build_env_and_args(kit_name, always_use_terminal, global_kits_path
     add_args({ "-DCMAKE_TOOLCHAIN_FILE:FILEPATH=" .. kit.toolchainFile })
   end
 
+  if kit.cmakeSettings then
+    for option, value in pairs(kit.cmakeSettings) do
+      if always_use_terminal then
+        add_args({ "-D" .. option .. ":STRING=\"" .. value .. "\"" })
+      else
+        add_args({ "-D" .. option .. ":STRING=" .. value })
+      end
+    end
+  end
+
   if kit.environmentVariables then
     for k, v in pairs(kit.environmentVariables) do
       add_env({ k .. "=" .. v })
